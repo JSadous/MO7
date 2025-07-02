@@ -86,6 +86,12 @@ Why is MERN a good choice for full development?
  - MERN is a good choice because it allows full-stack development using JavaScript,
   - offers strong performance, and supports rapid development with reusable components.
 
+---
+
+Provided two mern git hub links
+- https://github.com/BenElferink/mern-template
+ - https://github.com/SEI-Remote/decoupled-mern-jwt-auth-template-back-end
+
 
 
 
