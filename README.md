@@ -90,8 +90,12 @@ Why is MERN a good choice for full development?
 
 Provided two mern git hub links
 - https://github.com/BenElferink/mern-template
- - https://github.com/SEI-Remote/decoupled-mern-jwt-auth-template-back-end
+ -I find this intresting because it uses passport js for authentication
 
+---
+
+- https://github.com/SEI-Remote/decoupled-mern-jwt-auth-template-back-end
+ - I find this intersting because the creator uses JWT for code clean up
 
 
 
