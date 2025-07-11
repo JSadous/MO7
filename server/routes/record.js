@@ -6,6 +6,9 @@ import db from "../db/connection.js";
 // This help convert the id from string to ObjectId for the _id.
 import { ObjectId } from "mongodb";
 
+// Import agent schema and validation functions
+import { validateAgent, sanitizeAgent, createAgentDocument } from "../models/Agent.js";
+
 // router is an instance of the express router.
 // We use it to define our routes.
 // The router will be added as a middleware and will take control of requests starting with path /record.
@@ -31,14 +34,21 @@ router.get("/:id", async (req, res) => {
 // This section will help you create a new record.
 router.post("/", async (req, res) => {
   try {
-    let newDocument = {
-      name: req.body.name,
-      position: req.body.position,
-      level: req.body.level,
-    };
+    // Validate the agent data
+    const validation = validateAgent(req.body);
+    if (!validation.isValid) {
+      return res.status(400).json({
+        error: "Validation failed",
+        details: validation.errors
+      });
+    }
+
+    // Create a new agent document with proper schema
+    const newDocument = createAgentDocument(req.body);
+    
     let collection = await db.collection("records");
     let result = await collection.insertOne(newDocument);
-    res.send(result).status(204);
+    res.send(result).status(201);
   } catch (err) {
     console.error(err);
     res.status(500).send("Error adding record");
@@ -48,17 +58,26 @@ router.post("/", async (req, res) => {
 // This section will help you update a record by id.
 router.patch("/:id", async (req, res) => {
   try {
+    // Validate the agent data
+    const validation = validateAgent(req.body);
+    if (!validation.isValid) {
+      return res.status(400).json({
+        error: "Validation failed",
+        details: validation.errors
+      });
+    }
+
     const query = { _id: new ObjectId(req.params.id) };
-    const updates = {
-      $set: {
-        name: req.body.name,
-        position: req.body.position,
-        level: req.body.level,
-      },
-    };
+    const sanitizedData = sanitizeAgent(req.body);
+    const updates = { $set: sanitizedData };
 
     let collection = await db.collection("records");
     let result = await collection.updateOne(query, updates);
+    
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ error: "Record not found" });
+    }
+    
     res.send(result).status(200);
   } catch (err) {
     console.error(err);
