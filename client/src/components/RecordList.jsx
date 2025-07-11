@@ -7,10 +7,16 @@ const Record = (props) => (
       {props.record.name}
     </td>
     <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0">
-      {props.record.position}
+      {props.record.region}
     </td>
     <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0">
-      {props.record.level}
+      {props.record.rating}
+    </td>
+    <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0">
+      {props.record.fee}
+    </td>
+    <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0">
+      {props.record.sales}
     </td>
     <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0">
       <div className="flex gap-2">
@@ -79,7 +85,7 @@ export default function RecordList() {
   // This following section will display the table with the records of individuals.
   return (
     <>
-      <h3 className="text-lg font-semibold p-4">Employee Records</h3>
+      <h3 className="text-lg font-semibold p-4">Agent Records</h3>
       <div className="border rounded-lg overflow-hidden">
         <div className="relative w-full overflow-auto">
           <table className="w-full caption-bottom text-sm">
@@ -89,10 +95,16 @@ export default function RecordList() {
                   Name
                 </th>
                 <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0">
-                  Position
+                  Region
                 </th>
                 <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0">
-                  Level
+                  Rating
+                </th>
+                <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0">
+                  Fee
+                </th>
+                <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0">
+                  Sales
                 </th>
                 <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0">
                   Action
